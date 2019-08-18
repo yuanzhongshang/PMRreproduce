@@ -1,4 +1,4 @@
-library(PPMR)
+library(PMR)
 
 #load the scaled genenotype matrix in eQTL data (e.g. cis-SNPs of BACE1 gene from GEUVADIS data)
 zx<-read.table("zx.txt")
@@ -33,7 +33,7 @@ squaresigma_y<-1-alpha^2
 epison_y<-matrix(rnorm(n2, 0, sd = sqrt(squaresigma_y)), n2, 1)
 y<-y_mean+epison_y
 
-#run the PPMR model using PMR_individual function
+#run the PMR model using PMR_individual function
 fmH1 = PMR_individual(x, y, zx, zy,gammain=0,alphain = 0,max_iterin =1000,epsin=1e-5)
 fmH0gamma = PMR_individual(x, y, zx, zy,gammain=1, alphain = 0,max_iterin =1000,epsin=1e-5)
 fmH0alpha = PMR_individual(x, y, zx, zy,gammain=0,alphain = 1,max_iterin =1000, epsin=1e-5)
