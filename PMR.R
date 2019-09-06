@@ -34,6 +34,10 @@ epison_y<-matrix(rnorm(n2, 0, sd = sqrt(squaresigma_y)), n2, 1)
 y<-y_mean+epison_y
 
 #run the PMR model using PMR_individual function
+yin=as.vector(x)
+zin=as.vector(y)
+x1in=zx
+x2in=zy
 result<-PMR_individual(yin, zin, x1in, x2in, method = "PMR_individual_Egger",  max_iterin = 1000, epsin = 1e-05,  Heritability_geneexpression_threshold = 1e-04)
 
 #get the estimate of the causal effect
