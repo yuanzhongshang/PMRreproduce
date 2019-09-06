@@ -34,25 +34,18 @@ epison_y<-matrix(rnorm(n2, 0, sd = sqrt(squaresigma_y)), n2, 1)
 y<-y_mean+epison_y
 
 #run the PMR model using PMR_individual function
-fmH1 = PMR_individual(x, y, zx, zy,gammain=0,alphain = 0,max_iterin =1000,epsin=1e-5)
-fmH0gamma = PMR_individual(x, y, zx, zy,gammain=1, alphain = 0,max_iterin =1000,epsin=1e-5)
-fmH0alpha = PMR_individual(x, y, zx, zy,gammain=0,alphain = 1,max_iterin =1000, epsin=1e-5)
-loglikH1=max(fmH1$loglik,na.rm=T)
-loglikH0gamma=max(fmH0gamma$loglik,na.rm=T)
-loglikH0alpha=max(fmH0alpha$loglik,na.rm=T)
-stat_alpha = 2 * (loglikH1 - loglikH0alpha)
-stat_gamma = 2 * (loglikH1 - loglikH0gamma)
+result<-PMR_individual(yin, zin, x1in, x2in, method = "PMR_individual_Egger",  max_iterin = 1000, epsin = 1e-05,  Heritability_geneexpression_threshold = 1e-04)
 
 #get the estimate of the causal effect
-alpha<-fmH1$alpha
+alpha<-result$causal_effect
 
 #get the estimate of the pleiotropy effect
-gamma<-fmH1$gamma
+gamma<-result$pleiotropy_effect
 
 #get the pvalue for the causal test
-pvalue_alpha = pchisq(stat_alpha,1,lower.tail=F)
+pvalue_alpha = result$causal_pvalue
 
 #get the pvalue for the pleiotropy effect
-pvalue_gamma = pchisq(stat_gamma,1,lower.tail=F)
+pvalue_gamma = result$pleiotropy_pvalue
 #################################
 ###################################
