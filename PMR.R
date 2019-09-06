@@ -28,7 +28,7 @@ x <- zx %*% beta + epison_x
 x<-as.matrix(x)
 
 #get the simulated phenotype
-y_mean=as.vector(zy%*%rep(betaa,q))
+y_mean=as.vector(zy%*%rep(gamma,q))
 squaresigma_y<-1-alpha^2
 epison_y<-matrix(rnorm(n2, 0, sd = sqrt(squaresigma_y)), n2, 1)
 y<-y_mean+epison_y
